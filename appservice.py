@@ -1,6 +1,4 @@
 import flask
 
-afdsgfdgfhgjk
 
-hfjhfh
-gvbhnjmk,l.njmk
+print("hello wrold")
