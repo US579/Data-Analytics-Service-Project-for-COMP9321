@@ -1,12 +1,10 @@
 import json
 from functools import wraps
-from time import time, ctime
 import pandas as pd
 import numpy as np
 import pymongo
 from pymongo import MongoClient
-from requests import *
-from flask import Flask, g, request
+from flask import Flask, request
 from flask_restplus import Resource, Api
 from flask_restplus import fields, abort
 from flask_restplus import inputs
