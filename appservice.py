@@ -156,5 +156,3 @@ if __name__ == '__main__':
     expires_in = 600
     auth = AuthenticationToken(SECRET_KEY, expires_in)
     app.run(debug = True)
-=======
->>>>>>> 2832d00c58018bdb1f924ccb834d9975f3d6de6d
