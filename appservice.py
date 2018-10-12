@@ -10,6 +10,7 @@ from flask_restplus import fields, abort
 from flask_restplus import inputs, reqparse
 from itsdangerous import SignatureExpired, JSONWebSignatureSerializer, BadSignature
 
+<<<<<<< HEAD
 # Connect to mlab
 class Connect(object):
     @staticmethod    
@@ -155,3 +156,5 @@ if __name__ == '__main__':
     expires_in = 600
     auth = AuthenticationToken(SECRET_KEY, expires_in)
     app.run(debug = True)
+=======
+>>>>>>> 2832d00c58018bdb1f924ccb834d9975f3d6de6d
