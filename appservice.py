@@ -10,7 +10,7 @@ from flask_restplus import fields, abort
 from flask_restplus import inputs, reqparse
 from itsdangerous import SignatureExpired, JSONWebSignatureSerializer, BadSignature
 
-
+<<<<<<< HEAD
 # Connect to mlab
 class Connect(object):
     @staticmethod    
