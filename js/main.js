@@ -32,7 +32,7 @@ reset.onclick = function(){
 }
 
 logout.onclick = function(){
-    window.location.href = 'index.htm';
+    window.location.href = './index.htm';
 }
 
 submit.onclick = function(){

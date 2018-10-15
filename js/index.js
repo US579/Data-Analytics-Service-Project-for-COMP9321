@@ -16,6 +16,6 @@ submit.onclick = function(){
         
     }
     )*/
-    window.location.href = 'main.htm';
+    window.location.href = './main.htm';
   
 }
