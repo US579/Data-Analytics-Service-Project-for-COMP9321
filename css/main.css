@@ -1,0 +1,206 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+}
+.top {
+    background-color: skyblue;
+    height: 60px;
+    width: 100%;
+}
+
+.top .top-slogan {
+    float: left;
+    margin-top: 10px;
+    margin-left: 20px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+}
+
+.top .slogan-1 {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.top .slogan-2 {
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.top .top-button {
+    float: right;
+    cursor: pointer;
+    margin-right: 20px;
+    width: 70px;
+    height: 30px;
+    margin-top: 15px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    border: 1px solid #fff;
+    background-color:skyblue;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.title {
+    width: 100%;
+    height: 250px;
+    background-color:skyblue;
+    position: relative;
+    
+}
+
+.title-border {
+    background-color: skyblue;
+    padding: 1px;
+}
+
+.title-border::after{
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: auto;
+    bottom: 10px;
+    margin-left: -250px;
+    height: 1px;
+    width: 500px;
+    background-color: #fff;
+}
+
+.title-word {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    font-size: 40px;
+}
+
+.word-1 {
+    height: 60px;
+    line-height: 60px;
+    position: relative;
+    top: 65px;
+    display: block;
+}
+
+.word-2 {
+    height: 60px;
+    line-height: 60px;
+    position: relative;
+    display: block;
+    top:65px;
+}
+
+.word-result {
+    position: absolute;
+    display: none;
+    top: 50%;
+    line-height: 60px;
+    height: 60px;
+    margin-top: -30px;
+}
+
+.input {
+    height: 400px;
+    background-color:skyblue;
+    width: 100%;
+    position: absolute;
+}
+
+.input-margin {
+    margin-top: 40px;
+}
+
+.input-seg {
+    width: 400px;
+    height: 40px;
+    position: relative;
+    left: 50%;
+    margin-left: -200px;
+}
+
+.seg-label {
+    float: left;
+    width: 150px;
+    background-color: skyblue;
+
+}
+
+.input-input {
+    float: right;
+    background-color: #fff;
+    width: 200px;
+    height: 20px;
+    padding-left: 10px;
+}
+
+
+.input-box {
+    text-align: center;
+    margin-top: 30px;
+}
+
+
+.input-button {
+    width: 130px;
+    height: 35px;
+    border-radius: 5px;
+    display: inline-block;
+    line-height: 35px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+span {
+    width: 100px;
+    color: #fff;
+}
+
+.submit {
+    background-color: black;
+}
+
+.reset {
+    background-color: skyblue;
+    border: 1px solid #fff;
+}
+
+.bottom {
+    height: 100px;
+    width: 100%;
+    background-color: skyblue;
+}
+
+
+.app-name {
+    height: 30px;
+    background-color: skyblue;
+    border-top: 0;
+    border-bottom: 1px white solid;
+    border-left: 0;
+    border-right: 0;
+    padding-left: 5px;
+}
+
+.app-name:focus {
+    background-color: white;
+}
+
+
+#range {
+    padding: 0 0;
+    width: 160px;
+}
+
+#range-value {
+    width: 30px;
+    float: right;
+    margin-right: 15px;
+}
+
