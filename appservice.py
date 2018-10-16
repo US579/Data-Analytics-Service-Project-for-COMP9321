@@ -147,6 +147,8 @@ class App_predict(Resource):
             #                       size, price, content_rating, Android_version)
             # final_result = {'result': result}
             # final_result = simplejson.dumps(final_result)
+            final_result = {'result': 'result'}
+            final_result = simplejson.dumps(final_result)
             return final_result, 200
         else:
             return {'message': 'Please make sure that you enter all features'}, 400
