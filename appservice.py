@@ -1,22 +1,19 @@
 import json
 from functools import wraps
+from time import *
 import pandas as pd
 import numpy as np
 import pymongo
+import simplejson
 from pymongo import MongoClient
 from flask import Flask, request
 from flask_restplus import Resource, Api
 from flask_restplus import fields, abort
 from flask_restplus import inputs, reqparse
+from flask import make_response
+from flask_json import FlaskJSON, as_json_p
 from itsdangerous import SignatureExpired, JSONWebSignatureSerializer, BadSignature
 
-<<<<<<< HEAD
-# Connect to mlab
-class Connect(object):
-    @staticmethod    
-    def get_connection():
-        # Waiting for data_cleasing
-        return MongoClient("mongodb://<username>:<password>@<correct url>")
 
 # Construct API
 authorizations = {
@@ -28,6 +25,7 @@ authorizations = {
 }
 
 app = Flask(__name__)
+json = FlaskJSON(app)
 api = Api(app,
           default="Install Predict",  # Default namespace
           title="App Dataset",  # Documentation Title
@@ -35,16 +33,14 @@ api = Api(app,
           authorizations=authorizations,
           security='apikey') # Set Authentication Model
 
-predict_model = api.model('App',
-                          {'App_name': fields.String},
-                          {'category': fields.String},
-                          {'rating_of_comparable_app': fields.Float},
-                          {'size': fields.Integer},
-                          {'price': fields.Float},
-                          {'content_rating': fields.Float},
-                          {'Android_version': fields.String})
-
-data_type = ['App_name', 'category', 'rating_of_comparable_app', 'size', 'price', 'content_rating', 'Android_version']
+predict_model = reqparse.RequestParser()
+predict_model.add_argument('reviews', type = str)
+predict_model.add_argument('category', type = str)
+predict_model.add_argument('rating_of_comparable_app', type = float)
+predict_model.add_argument('size', type = float)
+predict_model.add_argument('price', type = float)
+predict_model.add_argument('content_rating', type = float)
+predict_model.add_argument('Android_version', type = float)
 
 credential_parser = reqparse.RequestParser()
 credential_parser.add_argument('username', type = str)
@@ -82,26 +78,25 @@ class AuthenticationToken:
 # CLIENT-SIDE should retransmit GIVEN TOKEN and other information
 # Specially, GIVEN TOKEN should in a format of HEADER. If this is too
 # hard to implement, please tell me and I will change it.
-@api.route('/log_in')
+@api.route('/login')
 class Token(Resource):
     @api.response(200, 'Successful')
     @api.doc(description="Generates a authentication token")
     @api.expect(credential_parser, validate=True)
+    @as_json_p
     def get(self):
         args = credential_parser.parse_args()
 
         username = args.get('username')
         password = args.get('password')
-        
-        # This part may be changed due to our idea
+        data = {"token":auth.generate_token(username)}
+        data = simplejson.dumps(data)
         if username == 'admin' and password == 'admin':
-            return {'token': auth.generate_token(username)}
+            return  data, 200
 
-        return {'message': 'authorization has been refused for those credentials.'}, 401
+        return {'message':'authorization has been refused for those credentials.'}, 401
 
 
-# Pretty complex and confusing ('wraps' only).
-# Please do not ask me why.
 def requires_auth(f):
     @wraps(f)
     def decorated(*args, **kwargs):
@@ -121,7 +116,6 @@ def requires_auth(f):
 
     return decorated
 
-
 # Request part
 @api.route('/predict')
 class App_predict(Resource):
@@ -131,28 +125,39 @@ class App_predict(Resource):
     @api.doc(description="Receive data and give prediction")
     @api.expect(predict_model, validate = True)
     @requires_auth
+    @as_json_p
     def get(self):
         # Justify if there is no data inside
-        predict = request.json
-        for i in data_type:
-            if not predict[i]:
-                return {'message': 'Please make sure that you enter all features'}, 400
-
-        # ML model function
-        result = ML_function(predict['App_name'], predict['category'], predict['rating_of_comparable_app'], 
-                             predict['size'], predict['price'], predict['content_rating'], predict['Android_version'])
-
-        return {'Result': result}
+        args = predict_model.parse_args()
+        reviews = args.get('reviews')
+        category = args.get('category')
+        rating_of_comparable_app = args.get('rating_of_comparable_app')
+        size = args.get('size')
+        price = args.get('price')
+        content_rating = args.get('content_rating')
+        Android_version = args.get('Android_version')
+        print(reviews, category, rating_of_comparable_app,\
+              size, price, content_rating, Android_version)
+        if reviews and category and rating_of_comparable_app and\
+           size and price and content_rating and Android_version:
+            ## ML model function
+            ## You should return an ensured value if you want to debug
+            
+            # result = ML_function(reviews, category, rating_of_comparable_app, 
+            #                       size, price, content_rating, Android_version)
+            # final_result = {'result': result}
+            # final_result = simplejson.dumps(final_result)
+            return final_result, 200
+        else:
+            return {'message': 'Please make sure that you enter all features'}, 400
 
 
 if __name__ == '__main__':
-    # Get data from mlab
-    connection = Connect.get_connection()
     
     # Authentation Initialization
     SECRET_KEY = "A SECRET KEY, USUALLY A VERY LONG RANDOM STRING. ANYWAY, IT REALLY DOES NOT MATTER WHAT IT IS."
     # Expiring time could be changed
-    # In this case, time is setted as 10 mins
-    expires_in = 600
+    # In this case, time is setted as 100 mins
+    expires_in = 6000
     auth = AuthenticationToken(SECRET_KEY, expires_in)
     app.run(debug = True)
