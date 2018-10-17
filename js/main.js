@@ -13,12 +13,11 @@ var word_1 = document.getElementById("word-1");
 var word_2 = document.getElementById("word-2");
 var word_result = document.getElementById("word-result");
 
-
-range.onmousemove = function(){
+range.onmousemove = function () {
     range_value.innerHTML = range.value;
 }
 
-reset.onclick = function(){
+reset.onclick = function () {
     size.value = '';
     price.value = '';
     reviews.value = '';
@@ -31,12 +30,33 @@ reset.onclick = function(){
     word_2.innerHTML = "of your application";
 }
 
-logout.onclick = function(){
+logout.onclick = function () {
     window.location.href = './index.htm';
 }
 
-submit.onclick = function(){
-    word_1.innerHTML = "The predicted installs are:";
-    word_2.innerHTML = "0";
-
+submit.onclick = function () {
+    //word_1.innerHTML = "The predicted installs are:";
+    //word_2.innerHTML = "0";
+    var url = "http://127.0.0.1:5000/predict";
+    $.ajax({
+        url: url,
+        type: 'GET',
+        dataType: 'JSON',
+        crossDomain: true,
+        data: {
+            'reviews': 4.0,
+            'category': 4.0,
+            'rating_of_comparable_app': 4.0,
+            'size': 4.0,
+            'price': 4.0,
+            'content_rating': 4.0,
+            'Android_version': 4.0
+        },
+        beforeSend: function (request) {
+            request.setRequestHeader("AUTH-TOKEN", window.localStorage.getItem('token'));
+        },
+        success: function (XMLHttpRequest, textStatus, data, xhr) {
+            console.log(data)
+        },
+    })
 }
