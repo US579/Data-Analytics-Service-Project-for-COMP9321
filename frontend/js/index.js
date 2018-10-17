@@ -5,6 +5,10 @@ submit.onclick = function(){
 
     var  username =document.getElementById('username').value
     var  password =document.getElementById('password').value
+    if (! username || !password){
+        alert('Username and Password can not be empty');
+        return
+    }
     var url="http://127.0.0.1:5000/login"
     $.ajax({
         url: url,
@@ -20,7 +24,7 @@ submit.onclick = function(){
             var obj = JSON.parse(data.responseJSON);
             if (obj.message == 'authorization has been refused for those credentials.')
             {
-                alert('username and password are not correct');
+                alert('Username and Password are not correct');
                 return
             }
             else{
