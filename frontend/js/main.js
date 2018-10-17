@@ -14,6 +14,20 @@ var word_2 = document.getElementById("word-2");
 var word_result = document.getElementById("word-result");
 
 
+
+
+
+
+function is_number(e){
+    var char_code = e.charCode ? e.charCode : e.keyCode;
+    if((char_code>=48 && char_code <= 57) || ( char_code == 46)){
+        return true;
+    }
+    else{
+        return false;    
+    }
+}
+
 range.onmousemove = function(){
     range_value.innerHTML = range.value;
 }
@@ -32,7 +46,7 @@ reset.onclick = function(){
 }
 
 logout.onclick = function(){
-    window.location.href = 'index.htm';
+    window.location.href = 'index.html';
 }
 
 submit.onclick = function(){

@@ -10,6 +10,7 @@
 </head>
 
 <body>
+
     <div class="top">
         <div class="top-slogan slogan-1">Prediction</div>
         <div class="top-slogan slogan-2">for your new applications</div>
@@ -68,15 +69,22 @@
             </div>
             <div class="input-seg">
                 <span class="seg-label">Reviews</span>
-                <input class="input-input reviews" type="text" id="reviews">
+                <input class = "input-input reviews" type="text" maxlength="8"
+                    placeholder="input a number" 
+                    id = "reviews" onkeypress="return is_number(event)" />
             </div>
             <div class="input-seg">
                 <span class="seg-label">Size(mb)</span>
-                <input class="input-input size" type="text" id="size">
+                <input class="input-input size" type="text" maxlength="3" 
+                    placeholder="input a number" 
+                    id="size" onkeypress="return is_number(event)"/>
             </div>
             <div class="input-seg">
                 <span class="seg-label">Price($)</span>
-                <input class="input-input price" type="text" id="price">
+                <input class="input-input price" type="text" min="0" max="400" 
+                    maxlength="3"     
+                    placeholder="input a number" 
+                    id="price" onkeypress="return is_number(event)" />
             </div>
             <div class="input-seg">
                 <span class="seg-label">Content Rating</span>
@@ -117,7 +125,7 @@
         </div>
         <div class="bottom">
         </div>
-        <script src="/js/main.js"></script>
+        <script src="js/main.js"></script>
 </body>
 
 </html>
