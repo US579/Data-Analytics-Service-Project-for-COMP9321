@@ -33,10 +33,11 @@ submit.onclick = function(){
             
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
+            alert("Connection refused")
             
-            alert(XMLHttpRequest.status);
-            alert(XMLHttpRequest.readyState);
-            alert(textStatus);
+            //alert(XMLHttpRequest.status);
+            //alert(XMLHttpRequest.readyState);
+            //alert(textStatus);
         }
         
     })
