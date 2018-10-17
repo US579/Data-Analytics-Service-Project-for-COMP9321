@@ -1,4 +1,3 @@
-from ML import *
 import json
 from functools import wraps
 from time import *
@@ -14,8 +13,16 @@ from flask_restplus import inputs, reqparse
 from flask import make_response
 from flask_json import FlaskJSON, as_json_p
 from itsdangerous import SignatureExpired, JSONWebSignatureSerializer, BadSignature
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.utils import shuffle
+import pickle
+from flask import jsonify
+from flask_cors import *
 
-
+def prediction(category, rating, reviews, size, price, content_rating, android_ver, save_file = 'trained_model.sav'):
+    knn_load = pickle.load(open(save_file, 'rb'))
+    pred = knn_load.predict([[category, rating, reviews, size, price, content_rating, android_ver]])
+    return pred
 # Construct API
 authorizations = {
     'apikey': {
@@ -26,7 +33,8 @@ authorizations = {
 }
 
 app = Flask(__name__)
-json = FlaskJSON(app)
+CORS(app)
+##json = FlaskJSON(app)
 api = Api(app,
           default="Install Predict",  # Default namespace
           title="App Dataset",  # Documentation Title
@@ -35,8 +43,8 @@ api = Api(app,
           security='apikey') # Set Authentication Model
 
 predict_model = reqparse.RequestParser()
-predict_model.add_argument('reviews', type = str)
-predict_model.add_argument('category', type = str)
+predict_model.add_argument('reviews', type = float)
+predict_model.add_argument('category', type = float)
 predict_model.add_argument('rating_of_comparable_app', type = float)
 predict_model.add_argument('size', type = float)
 predict_model.add_argument('price', type = float)
@@ -84,16 +92,18 @@ class Token(Resource):
     @api.response(200, 'Successful')
     @api.doc(description="Generates a authentication token")
     @api.expect(credential_parser, validate=True)
-    @as_json_p
+    #@as_json_p
     def get(self):
         args = credential_parser.parse_args()
 
         username = args.get('username')
         password = args.get('password')
         data = {"token":auth.generate_token(username)}
-        data = simplejson.dumps(data)
+        response = jsonify(data)
+        response.status_code = 200
+        #data = simplejson.dumps(data)
         if username == 'admin' and password == 'admin':
-            return  data, 200
+            return  response
 
         return simplejson.dumps({'message':'authorization has been refused for those credentials.'}), 401
 
@@ -140,11 +150,13 @@ class App_predict(Resource):
         print(reviews, category, rating_of_comparable_app,\
               size, price, content_rating, Android_version)
         if reviews and category and rating_of_comparable_app and\
-           size and price and content_rating and Android_version:
+           size and content_rating and Android_version:
             ## ML model function
             ## You should return an ensured value if you want to debug
             
             result = prediction(category, rating_of_comparable_app, reviews, size, price, content_rating, Android_version)
+            result = str(result)
+            print(result)
             final_result = {'result': result}
             final_result = simplejson.dumps(final_result)
 
