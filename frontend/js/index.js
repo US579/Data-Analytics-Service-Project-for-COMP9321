@@ -28,7 +28,8 @@ submit.onclick = function(){
                 return
             }
             else{
-                window.location.href = './main.html';
+                alert(obj.message)
+               // window.location.href = './main.html';
             }
 
             //alert('success');
