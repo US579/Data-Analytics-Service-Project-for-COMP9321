@@ -144,7 +144,7 @@ class App_predict(Resource):
             ## ML model function
             ## You should return an ensured value if you want to debug
             
-            result = ML_function(category, rating_of_comparable_app, reviews, size, price, content_rating, Android_version)
+            result = prediction(category, rating_of_comparable_app, reviews, size, price, content_rating, Android_version)
             final_result = {'result': result}
             final_result = simplejson.dumps(final_result)
 
