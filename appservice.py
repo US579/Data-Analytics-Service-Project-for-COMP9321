@@ -1,3 +1,4 @@
+from ML import *
 import json
 from functools import wraps
 from time import *
@@ -94,7 +95,7 @@ class Token(Resource):
         if username == 'admin' and password == 'admin':
             return  data, 200
 
-        return {'message':'authorization has been refused for those credentials.'}, 401
+        return simplejson.dumps({'message':'authorization has been refused for those credentials.'}), 401
 
 
 def requires_auth(f):
@@ -143,15 +144,13 @@ class App_predict(Resource):
             ## ML model function
             ## You should return an ensured value if you want to debug
             
-            # result = ML_function(reviews, category, rating_of_comparable_app, 
-            #                       size, price, content_rating, Android_version)
-            # final_result = {'result': result}
-            # final_result = simplejson.dumps(final_result)
-            final_result = {'result': 'result'}
+            result = prediction(category, rating_of_comparable_app, reviews, size, price, content_rating, Android_version)
+            final_result = {'result': result}
             final_result = simplejson.dumps(final_result)
+
             return final_result, 200
         else:
-            return {'message': 'Please make sure that you enter all features'}, 400
+            return simplejson.dumps({'message': 'Please make sure that you enter all features'}), 400
 
 
 if __name__ == '__main__':
