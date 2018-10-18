@@ -20,6 +20,7 @@ from flask import jsonify
 from flask_cors import *
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 def prediction(category, rating, reviews, size, price, content_rating, android_ver, save_file='trained_model.sav'):
     knn_load = pickle.load(open(save_file, 'rb'))
@@ -28,10 +29,15 @@ def prediction(category, rating, reviews, size, price, content_rating, android_v
 
 
 =======
+=======
+>>>>>>> 81eba1ba8fbf9d84d5ea5d3986ebb3bfbf002fb0
 def prediction(category, rating, reviews, size, price, content_rating, android_ver, save_file = 'trained_model.sav'):
     knn_load = pickle.load(open(save_file, 'rb'))
     pred = knn_load.predict([[category, rating, reviews, size, price, content_rating, android_ver]])
     return pred
+<<<<<<< HEAD
+>>>>>>> 81eba1ba8fbf9d84d5ea5d3986ebb3bfbf002fb0
+=======
 >>>>>>> 81eba1ba8fbf9d84d5ea5d3986ebb3bfbf002fb0
 # Construct API
 authorizations = {
@@ -54,6 +60,7 @@ api = Api(app,
 
 predict_model = reqparse.RequestParser()
 <<<<<<< HEAD
+<<<<<<< HEAD
 predict_model.add_argument('reviews', type=float)
 predict_model.add_argument('category', type=float)
 predict_model.add_argument('rating_of_comparable_app', type=float)
@@ -62,6 +69,8 @@ predict_model.add_argument('price', type=float)
 predict_model.add_argument('content_rating', type=float)
 predict_model.add_argument('Android_version', type=float)
 =======
+=======
+>>>>>>> 81eba1ba8fbf9d84d5ea5d3986ebb3bfbf002fb0
 predict_model.add_argument('reviews', type = float)
 predict_model.add_argument('category', type = float)
 predict_model.add_argument('rating_of_comparable_app', type = float)
@@ -113,7 +122,11 @@ class Token(Resource):
     @api.doc(description="Generates a authentication token")
     @api.expect(credential_parser, validate=True)
 <<<<<<< HEAD
+<<<<<<< HEAD
     # @as_json_p
+=======
+    #@as_json_p
+>>>>>>> 81eba1ba8fbf9d84d5ea5d3986ebb3bfbf002fb0
 =======
     #@as_json_p
 >>>>>>> 81eba1ba8fbf9d84d5ea5d3986ebb3bfbf002fb0
@@ -136,6 +149,9 @@ class Token(Resource):
         #data = simplejson.dumps(data)
         if username == 'admin' and password == 'admin':
             return  response
+<<<<<<< HEAD
+>>>>>>> 81eba1ba8fbf9d84d5ea5d3986ebb3bfbf002fb0
+=======
 >>>>>>> 81eba1ba8fbf9d84d5ea5d3986ebb3bfbf002fb0
 
         return simplejson.dumps({'message': 'authorization has been refused for those credentials.'}), 401
@@ -198,6 +214,9 @@ class App_predict(Resource):
             ## You should return an ensured value if you want to debug
             
             result = prediction(category, rating_of_comparable_app, reviews, size, price, content_rating, Android_version)
+<<<<<<< HEAD
+>>>>>>> 81eba1ba8fbf9d84d5ea5d3986ebb3bfbf002fb0
+=======
 >>>>>>> 81eba1ba8fbf9d84d5ea5d3986ebb3bfbf002fb0
             result = str(result)
             print(result)
