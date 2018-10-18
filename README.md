@@ -24,10 +24,10 @@ and open index.html
 
 ![image text](https://github.com/US579/Data-Analytics-Service-Project-for-COMP9321/blob/master/image/2.png) 
 
-and than you can login 
-username: admin
-password: admin
-after login the interface are showing below
+< br>and than you can login 
+< br>username: admin
+< br>password: admin
+< br>after login the interface are showing below
 ![image text](https://github.com/US579/Data-Analytics-Service-Project-for-COMP9321/blob/master/image/3.png) 
 
 now, you can input parameters to predict installations
