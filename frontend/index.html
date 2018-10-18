@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/index.css"> 
     <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
-<body>
+<body onkeydown="keyLogin()">
     <div class="top">
         <div class="slogan">
             <div class="slogan-1">Prediction</div>
@@ -28,7 +28,7 @@
             </div>
             <input type="password" placeholder="enter password here" onfocus="this.placeholder=''" onblur="this.placeholder='enter password here'" id = 'password'/>
         </div>
-        <div class="login-button" id="button">Log in</div>
+        <div class="login-button" id="button" >Log in</div>
     </div>
     <div class="login-layer"></div>
     <div class="bottom"></div>

@@ -7,9 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>main page</title>
     <link rel="stylesheet" href="css/main.css"></link>
+     <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 
-<body>
+<body onkeydown="keySumbit()" >
 
     <div class="top">
         <div class="top-slogan slogan-1">Prediction</div>
@@ -75,21 +76,21 @@
             </div>
             <div class="input-seg">
                 <span class="seg-label">Size(mb)</span>
-                <input class="input-input size" type="text" maxlength="3" 
+                <input class="input-input size" type="text" maxlength="6" 
                     placeholder="input a number" 
                     id="size" onkeypress="return is_number(event)"/>
             </div>
             <div class="input-seg">
                 <span class="seg-label">Price($)</span>
                 <input class="input-input price" type="text" min="0" max="400" 
-                    maxlength="3"     
+                    maxlength="6"     
                     placeholder="input a number" 
                     id="price" onkeypress="return is_number(event)" />
             </div>
             <div class="input-seg">
                 <span class="seg-label">Content Rating</span>
                 <select class="input-input content-rating" id="content-rating">
-                    <option value="0">EVERYONE</option>
+                    <option value="1">EVERYONE</option>
                     <option value="13">TEEN</option>
                     <option value="10">EVERYONE 10+</option>
                     <option value="17">MATURE 17+</option>
@@ -101,32 +102,31 @@
                 <span class="seg-label">Android Version</span>
                 <select class="input-input a-ver" id="a-ver">
                     <option value="0">VARIES WITH DEVICE</option>
-                    <option value="3.0">0.0</option>
-                    <option value="3.0">1.0</option>
-                    <option value="3.0">1.5</option>
-                    <option value="3.0">1.6</option>
-                    <option value="3.0">2.0</option>
-                    <option value="3.0">2.1</option>
-                    <option value="3.0">2.2</option>
-                    <option value="3.0">2.3</option>
+                    <option value="1.0">1.0</option>
+                    <option value="1.5">1.5</option>
+                    <option value="1.6">1.6</option>
+                    <option value="2.0">2.0</option>
+                    <option value="2.1">2.1</option>
+                    <option value="2.2">2.2</option>
+                    <option value="2.3">2.3</option>
                     <option value="3.0">3.0</option>
                     <option value="3.1">3.1</option>
                     <option value="3.2">3.2</option>
                     <option value="4.0">4.0</option>
-                    <option value="4.0">4.1</option>
-                    <option value="4.0">4.2</option>
-                    <option value="4.0">4.3</option>
-                    <option value="4.0">4.4</option>
+                    <option value="4.1">4.1</option>
+                    <option value="4.2">4.2</option>
+                    <option value="4.3">4.3</option>
+                    <option value="4.4">4.4</option>
                     <option value="5.0">5.0</option>
                     <option value="5.1">5.1</option>
                     <option value="6.0">6.0</option>
-                    <option value="6.0">7.0</option>
-                    <option value="6.0">7.1</option>
-                    <option value="6.0">8.0</option>
+                    <option value="7.0">7.0</option>
+                    <option value="7.1">7.1</option>
+                    <option value="8.0">8.0</option>
                 </select>
             </div>
             <div class="input-box">
-                <div class="input-button submit" id="submit">Submit</div>
+                <div class="input-button submit" id="submit" onkeydown="check()" OnClientClick="check()">Submit</div>
                 <div class="input-button reset" id="reset">Reset</div>
             </div>
         </div>

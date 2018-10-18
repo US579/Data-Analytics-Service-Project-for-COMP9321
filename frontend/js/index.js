@@ -1,52 +1,48 @@
+
 var submit = document.getElementById("button");
-
-
-submit.onclick = function(){
-
+function keyLogin(){
+    
+    if (event.keyCode === 13) {
+        document.getElementById("button").click(); 
+    return true
+ }
+}
+submit.onclick = function () {
     var  username =document.getElementById('username').value
     var  password =document.getElementById('password').value
-    if (! username || !password){
-        alert('Username and Password can not be empty');
+    //var  username =document.getElementById('username').value
+    //var  password =document.getElementById('password').value
+    if ((!username )|| (!password)){
+        alert('username and password can not be empty')
         return
     }
-    var url="http://127.0.0.1:5000/login"
+    var url = "http://127.0.0.1:5000/login"
     $.ajax({
         url: url,
         type: 'GET',
-        data:{
+        data: {
             'username':username,
             'password':password,
         },
-        dataType: 'JSONP',
-        crossDomain:true,
-
-        success: function(XMLHttpRequest, textStatus,data,xhr){
-            var obj = JSON.parse(data.responseJSON);
-            if (obj.message == 'authorization has been refused for those credentials.')
-            {
-                alert('Username and Password are not correct');
-                return
-            }
-            else{
-                alert(obj.message)
-               // window.location.href = './main.html';
-            }
-
-            //alert('success');
-            console.log(data.responseJSON);
-            //window.location.href = './main.html';
-            
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown){
-            alert("Connection refused")
-            
+        dataType: 'JSON',
+        crossDomain: true,
+        success: function (XMLHttpRequest, textStatus, data, xhr) {
+            console.log(data)
+            var token_str = JSON.stringify(data['responseJSON'].token)
+            console.log(typeof (token_str), token_str);
+            window.localStorage.setItem('token', token_str);
+            window.location.href = './main.html';
+            },
+            //window.location.href = './main.htm';
+         error: function(XMLHttpRequest, textStatus, errorThrown){
+             alert('username and password are not correct.');
             //alert(XMLHttpRequest.status);
             //alert(XMLHttpRequest.readyState);
             //alert(textStatus);
+             window.location.href = './index.html';
         }
-        
     })
-    
-  
 }
+
+
 
