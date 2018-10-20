@@ -66,7 +66,6 @@ submit.onclick = function () {
     var a_ver = document.getElementById("a-ver").value;
     var range = document.getElementById("range");
     var range_value = document.getElementById("range-value").value;
-    alert(range_value)
     console.log(range_value)
     //alert(category)
     //alert(range_value)
