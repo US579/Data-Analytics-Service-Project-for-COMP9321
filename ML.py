@@ -53,10 +53,11 @@ def clean(dataframe):
                       'Adults only 18+': 18, 
                       'Unrated': -1}
     dataframe = dataframe.copy()
-    columns_to_drop = ['App', 'Type', 'Genres', 'Last Updated', 'Current Ver']
+    columns_to_drop = ['Type', 'Genres', 'Last Updated', 'Current Ver']
     dataframe.drop(columns_to_drop, inplace=True, axis=1)
     dataframe = dataframe[pd.notnull(dataframe['Rating'])]
     dataframe.reset_index(drop=True, inplace=True)
+    dataframe['App'] = dataframe['App'].str.replace( ' ', '_' )
     dataframe['Android Ver'] = dataframe['Android Ver'].str.replace('Varies with device', '0.0')
     dataframe['Android Ver'] = dataframe['Android Ver'].str.replace(' and up', '')
     dataframe['Android Ver'] = dataframe['Android Ver'].str.extract(r'^(\d.\d)', expand=False)
@@ -79,7 +80,7 @@ def clean(dataframe):
 
 def load_app(dataframe, split_percentage):
     dataframe = shuffle(dataframe)
-    app_x = dataframe.drop('Installs', axis=1).values
+    app_x = dataframe.drop(['App','Installs'], axis=1).values
     app_y = dataframe['Installs'].values
     split_point = int(len(app_x) * split_percentage)
     app_X_train = app_x[:split_point]
@@ -94,7 +95,7 @@ def train_and_test(persent = 1):
     dataframe = pd.read_csv(csv_file)
     dataframe = clean(dataframe)
     print_dataframe(dataframe, True, False)
-    dataframe.to_csv('Dataset.csv', sep=',', encoding='utf-8')
+    dataframe.to_csv('Dataset_1.csv', sep=',', encoding='utf-8')
     app_X_train, app_y_train, app_X_test, app_y_test = load_app(dataframe, split_percentage = persent)
     knn = KNeighborsClassifier()
     knn.fit(app_X_train, app_y_train)
@@ -102,10 +103,17 @@ def train_and_test(persent = 1):
     pickle.dump(knn, open(save_file, 'wb'))
 
 
-def prediction(category, rating, reviews, size, price, content_rating, android_ver, save_file = 'trained_model.sav'):
+def prediction(category, rating, reviews, size, price, content_rating,android_ver,save_file = 'trained_model.sav'):
     knn_load = pickle.load(open(save_file, 'rb'))
     pred = knn_load.predict([[category, rating, reviews, size, price, content_rating, android_ver]])
-    return pred
+    dataframe=pd.read_csv('Dataset_1.csv')
+    relative_app=dataframe.loc[dataframe['Category']==category]
+    app_list=relative_app.loc[relative_app['Installs'] == pred[0]].iloc[:]['App'].tolist()
+    pred_result={}
+    pred_result['result']=set(pred)
+    pred_result['relative_app']=set(app_list[:2])
+    return pred_result
+
 
 
 

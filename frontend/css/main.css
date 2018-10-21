@@ -2,10 +2,11 @@
     margin: 0;
     padding: 0;
     font-family: 'Courier New', Courier, monospace;
+    background-color: skyblue
 }
 .top {
     background-color: skyblue;
-    height: 153px;
+    height: 60px;
     width: 100%;
 }
 
@@ -171,11 +172,42 @@ span {
     border: 1px solid #fff;
 }
 
+.again {
+    background-color:black;
+    text-align: center
+}
+
 .bottom {
     height: 100px;
     width: 100%;
     background-color: skyblue;
 }
+
+.result-button {
+    text-align: center;
+}
+
+.result {
+    text-align: center;
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+
+.result p{
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.result-input {
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.result-input span {
+    font-size: 24px;
+}
+
 
 
 .app-name {
@@ -204,3 +236,6 @@ span {
     margin-right: 15px;
 }
 
+#name-space {
+    height: 20px;
+}

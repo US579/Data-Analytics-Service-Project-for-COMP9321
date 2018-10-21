@@ -14,10 +14,17 @@ from functools import wraps
 from time import *
 from flask_cors import *
 
-def prediction(category, rating, reviews, size, price, content_rating, android_ver, save_file = 'trained_model.sav'):
+
+def prediction(category, rating, reviews, size, price, content_rating,android_ver,save_file = 'trained_model.sav'):
     knn_load = pickle.load(open(save_file, 'rb'))
     pred = knn_load.predict([[category, rating, reviews, size, price, content_rating, android_ver]])
-    return pred
+    dataframe=pd.read_csv('Dataset_1.csv')
+    relative_app=dataframe.loc[dataframe['Category']==category]
+    app_list=relative_app.loc[relative_app['Installs'] == pred[0]].iloc[:]['App'].tolist()
+    pred_result={}
+    pred_result['result'] = pred[0]
+    pred_result['relative_app']= (' ').join(app_list[:2])
+    return pred_result
 # Construct API
 authorizations = {
      'apikey': {
@@ -146,14 +153,12 @@ class App_predict(Resource):
         print(reviews, category, rating_of_comparable_app,\
               size, price, content_rating, Android_version)
         if reviews and category and rating_of_comparable_app and\
-           size and content_rating and Android_version:
+           size and content_rating:
             ## ML model function
             ## You should return an ensured value if you want to debug
             result = prediction(category, rating_of_comparable_app, reviews, size, price, content_rating, Android_version)
-            result = str(result)
-            print(result)
-            final_result = {'result': result}
-            final_result = jsonify(final_result)
+            ##print(result)
+            final_result = jsonify(result)
             final_result.status_code = 200
             return final_result
         else:

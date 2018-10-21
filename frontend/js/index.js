@@ -1,18 +1,16 @@
 
 var submit = document.getElementById("button");
-function keyLogin(){
-    
+function keyLogin() {
+
     if (event.keyCode === 13) {
-        document.getElementById("button").click(); 
-    return true
- }
+        document.getElementById("button").click();
+        return true
+    }
 }
 submit.onclick = function () {
-    var  username =document.getElementById('username').value
-    var  password =document.getElementById('password').value
-    //var  username =document.getElementById('username').value
-    //var  password =document.getElementById('password').value
-    if ((!username )|| (!password)){
+    var username = document.getElementById('username').value
+    var password = document.getElementById('password').value
+    if ((!username) || (!password)) {
         alert('username and password can not be empty')
         return
     }
@@ -21,8 +19,8 @@ submit.onclick = function () {
         url: url,
         type: 'GET',
         data: {
-            'username':username,
-            'password':password,
+            'username': username,
+            'password': password,
         },
         dataType: 'JSON',
         crossDomain: true,
@@ -30,16 +28,12 @@ submit.onclick = function () {
             console.log(data)
             var token_str = JSON.stringify(data['responseJSON'].token)
             console.log(typeof (token_str), token_str);
-            window.localStorage.setItem('token', token_str);
+            window.sessionStorage.setItem('token', token_str);
             window.location.href = './main.html';
-            },
-            //window.location.href = './main.htm';
-         error: function(XMLHttpRequest, textStatus, errorThrown){
-             alert('username and password are not correct.');
-            //alert(XMLHttpRequest.status);
-            //alert(XMLHttpRequest.readyState);
-            //alert(textStatus);
-             window.location.href = './index.html';
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert('username and password are not correct.');
+            window.location.href = './index.html';
         }
     })
 }

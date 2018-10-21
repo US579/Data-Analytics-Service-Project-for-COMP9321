@@ -7,10 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>main page</title>
     <link rel="stylesheet" href="css/main.css"></link>
-     <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 
-<body onkeydown="keySumbit()" >
+<body onkeydown="keySumbit()">
 
     <div class="top">
         <div class="top-slogan slogan-1">Prediction</div>
@@ -20,10 +20,20 @@
     <div class="title">
         <div class="title-word word-1" id="word-1">Please choose the features</div>
         <div class="title-word word-2" id="word-2">of your application</div>
-        <div class="title-word word-result" id="word-result">Your predicted installs are:</div>
         <div class="title-border"></div>
     </div>
-    <div class="input">
+    <div class="input" id="result-div">
+        <div class="result result-input">
+            <p>Relative apps:</p>
+            <span>1. </span><span id="name1">xxxx</span><br>
+            <div id="name-space"></div>
+            <span>2. </span><span id="name2">xxxx</span>
+        </div>
+        <div class="result result-button">
+            <div class="input-button again" id="again">Try again</div>
+        </div>
+    </div>
+    <div class="input" id="input-div">
         <div class="input-margin">
             <div class="input-seg">
                 <span class="seg-label">Category</span>
@@ -34,7 +44,7 @@
                     <option value="4">BOOKS_AND_REFERENCE</option>
                     <option value="5">BUSINESS</option>
                     <option value="6">COMICS</option>
-                    <option value="7">COMMUNICATION</option>
+                    <option value="7">COMMUNICATION</option>ß
                     <option value="8">DATING</option>
                     <option value="9">EDUCATION</option>
                     <option value="10">ENTERTAINMENT</option>
@@ -70,22 +80,18 @@
             </div>
             <div class="input-seg">
                 <span class="seg-label">Reviews</span>
-                <input class = "input-input reviews" type="text" maxlength="8"
-                    placeholder="input a number" 
-                    id = "reviews" onkeypress="return is_number(event)" />
+                <input class="input-input reviews" type="text" maxlength="8" placeholder="input a number" id="reviews" onkeypress="return is_number(event)"
+                />
             </div>
             <div class="input-seg">
                 <span class="seg-label">Size(mb)</span>
-                <input class="input-input size" type="text" maxlength="6" 
-                    placeholder="input a number" 
-                    id="size" onkeypress="return is_number(event)"/>
+                <input class="input-input size" type="text" maxlength="6" placeholder="input a number" id="size" onkeypress="return is_number(event)"
+                />
             </div>
             <div class="input-seg">
                 <span class="seg-label">Price($)</span>
-                <input class="input-input price" type="text" min="0" max="400" 
-                    maxlength="6"     
-                    placeholder="input a number" 
-                    id="price" onkeypress="return is_number(event)" />
+                <input class="input-input price" type="text" min="0" max="400" maxlength="6" placeholder="input a number" id="price" onkeypress="return is_number(event)"
+                />
             </div>
             <div class="input-seg">
                 <span class="seg-label">Content Rating</span>
@@ -130,9 +136,10 @@
                 <div class="input-button reset" id="reset">Reset</div>
             </div>
         </div>
-        <div class="bottom">
-        </div>
-        <script src="js/main.js"></script>
+    </div>
+    <div class="bottom">
+    </div>
+    <script src="js/main.js"></script>
 </body>
 
 </html>

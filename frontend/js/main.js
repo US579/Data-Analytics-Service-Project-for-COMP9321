@@ -12,26 +12,48 @@ var reset = document.getElementById("reset");
 var word_1 = document.getElementById("word-1");
 var word_2 = document.getElementById("word-2");
 var word_result = document.getElementById("word-result");
+var input_div = document.getElementById("input-div");
+var result_div = document.getElementById("result-div")
+var again = document.getElementById("again")
+var name1 = document.getElementById("name1")
+var name2 = document.getElementById("name2")
 
+result_div.style.display = "none"
+input_div.style.display = "block";
 
-function keySumbit(){
-    
+function keySumbit() {
     if (event.keyCode === 13) {
-        document.getElementById("submit").click(); 
-    return true
- }
+        document.getElementById("submit").click();
+        return true
+    }
 }
 
 
+again.onclick = function () {
+    result_div.style.display = "none"
+    input_div.style.display = "block";
+    word_1.innerHTML = "Please choose the features";
+    word_2.innerHTML = "of your application";
+    size.value = '';
+    price.value = '';
+    reviews.value = '';
+    range.value = '5';
+    range_value.innerHTML = '5'
+    category.value = '1';
+    a_ver.value = '0';
+    content_rating.value = '1';
+    word_1.innerHTML = "Please choose the features";
+    word_2.innerHTML = "of your application";
+}
 
 
-function is_number(e){
+function is_number(e) {
     var char_code = e.charCode ? e.charCode : e.keyCode;
-    if((char_code>=48 && char_code <= 57) || ( char_code == 46)){
+    if ((char_code >= 48 && char_code <= 57) || (char_code == 46)) {
         return true;
     }
-    else{
-        return false;    
+    else {
+        return false;
     }
 }
 
@@ -47,13 +69,13 @@ reset.onclick = function () {
     range_value.innerHTML = '5'
     category.value = '1';
     a_ver.value = '0';
-    content_rating.value = '0';
+    content_rating.value = '1';
     word_1.innerHTML = "Please choose the features";
     word_2.innerHTML = "of your application";
 }
 
 logout.onclick = function () {
-
+    window.sessionStorage.setItem("token", "");
     window.location.href = './index.html';
 }
 
@@ -65,64 +87,47 @@ submit.onclick = function () {
     var price = document.getElementById("price").value;
     var a_ver = document.getElementById("a-ver").value;
     var range = document.getElementById("range");
-    var range_value = document.getElementById("range-value").value;
-    console.log(range_value)
-    //alert(category)
-    //alert(range_value)
-    //alert(reviews)
-    //alert(size)
-    //alert(price)
-    //alert(content_rating)
-    //alert(a_ver)
-    if(!document.getElementById("reviews").value || !document.getElementById("size").value || !document.getElementById("price").value)
-    {
+    var range_value = document.getElementById("range-value").innerHTML;
+
+    if (!document.getElementById("reviews").value || !document.getElementById("size").value || !document.getElementById("price").value) {
         alert("Input can not be NULL!");
         return false;
-    }else{
+    } else {
 
-    //word_1.innerHTML = "The predicted installs are:";
-    //word_2.innerHTML = "0";
-    //request.setRequestHeader("AUTH-TOKEN", window.localStorage.getItem('token')
-    //alert(window.localStorage.getItem('token'))
-    var url = "http://127.0.0.1:5000/predict";
-    //var xhr = new XMLHttpRequest();
-    //xhr.open('GET', url, true);
-    //xhr.setRequestHeader('AUTH-TOKEN', window.localStorage.getItem('token'))
-    $(document).ajaxSend(function (event, xhr) {
-            xhr.setRequestHeader("AUTH-TOKEN",window.localStorage.getItem('token').replace("\"","").replace("\"","") ) ;  // 增加一个自定义请求头
-    });
-    $.ajax({
-        url: url,
-        type: 'GET',
-        dataType: 'JSON',
-        crossDomain: true,
-        //xhr.setRequestHeader('AUTH-TOKEN', window.localStorage.getItem('token')),
-        //beforeSend: function (request) {
-          //  request.setRequestHeader("AUTH-TOKEN", window.localStorage.getItem('token'));
-        //},
-        data: {
-            'reviews': reviews,
-            'category': category,
-            'rating_of_comparable_app':4,
-            'size': size,
-            'price': price,
-            'content_rating': content_rating,
-            'Android_version': a_ver,
-        },
+        var url = "http://127.0.0.1:5000/predict";
 
-        success: function (XMLHttpRequest, textStatus, data, xhr) {
-            console.log(data)
-            var token_str = JSON.stringify(data['responseJSON'].result.replace("\[","").replace("\]","").replace("\'","").replace("\'","") )
-            //alert(token_str)
-             word_1.innerHTML = "the predict installs number is ";
-
-             word_2.innerHTML = token_str;
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown){
-             alert('login expire,please login');
-            //alert(XMLHttpRequest.status);
-            //alert(XMLHttpRequest.readyState);
-            //alert(textStatus);
-        }
-    })
-}}
+        $(document).ajaxSend(function (event, xhr) {
+            if (window.sessionStorage.getItem('token')) {
+                xhr.setRequestHeader("AUTH-TOKEN", window.sessionStorage.getItem('token').replace("\"", "").replace("\"", ""));  // 增加一个自定义请求头
+            }
+        });
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'JSON',
+            crossDomain: true,
+            data: {
+                'reviews': reviews,
+                'category': category,
+                'rating_of_comparable_app': range_value,
+                'size': size,
+                'price': price,
+                'content_rating': content_rating,
+                'Android_version': a_ver,
+            },
+            success: function (XMLHttpRequest, textStatus, data, xhr) {
+                console.log(data)
+                var token_str = JSON.stringify(data['responseJSON'].result.replace("\[", "").replace("\]", "").replace("\'", "").replace("\'", ""))
+                result_div.style.display = "block"
+                input_div.style.display = "none";
+                word_1.innerHTML = "The predicted installs number is ";
+                word_2.innerHTML = token_str
+                name1.innerHTML = (data['responseJSON'].relative_app.split(" "))[0];
+                name2.innerHTML = (data['responseJSON'].relative_app.split(" "))[1];
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert('login expire,please login');
+            }
+        })
+    }
+}
