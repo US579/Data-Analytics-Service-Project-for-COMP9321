@@ -8,7 +8,7 @@
 In this project, 
 In order to help locate what kind of combination of App features will have more customers. 
 we are going to predict how welcome of the Android app by giving some features that the upcoming app have,
-the dataset is from https://www.kaggle.com/ which is the address of kaggle, we use K-nn module to train our dataset, although it may not very accurate, it still provide the brief estimation of how many installations will achieved. 
+the dataset is from https://www.kaggle.com/ which is the address of kaggle, we use K-nn module to train our dataset, although it may not very accurate, it still provide the brief estimation of how many installations will be achieved. 
 In the beginning , we extract the data that we wanted from big dataset and clean it by using pandas module, after that, K-nn module been applied to train our data, we get our model which is named 'trained_module.cav' in above.
 furthermore, for the better interaction, we develop a website for people who want to check which kind of combiation of app will have best installations.
 In the web part, we implement simple authorization function ,you may not need to register but have to use username and password to login, you are allow to request data in a time slot,afer it expire,however,you have to re-login to request data .
