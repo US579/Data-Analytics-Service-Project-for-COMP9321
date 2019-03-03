@@ -1,6 +1,7 @@
 
 # Data-Analytics-Service-Project-for-COMP9321
 ===============================
+
 Workflow
 -----------
 1.FIND DATASET
@@ -30,7 +31,8 @@ How to run
 it should look like below
 ![image text](https://github.com/US579/Data-Analytics-Service-Project-for-COMP9321/blob/master/image/1.png) 
 
-and open index.html
+
+2. open index.html
 
 ![image text](https://github.com/US579/Data-Analytics-Service-Project-for-COMP9321/blob/master/image/2.png) 
 
