@@ -37,6 +37,7 @@ How to run
 
 ![image text](https://github.com/US579/Data-Analytics-Service-Project-for-COMP9321/blob/master/image/2.png) 
 
+
 and than you can login 
 
 * `username: admin`
@@ -45,12 +46,14 @@ and than you can login
 
 after login the interface are showing below
 
+
 ![image text](https://github.com/US579/Data-Analytics-Service-Project-for-COMP9321/blob/master/image/3.png) 
 
   
 Interface controls
 -------------------
  Input parameters to predict installations
+ 
 ![image text](https://github.com/US579/Data-Analytics-Service-Project-for-COMP9321/blob/master/image/4.png) 
 
 
