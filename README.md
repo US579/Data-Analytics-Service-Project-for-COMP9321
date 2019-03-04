@@ -26,8 +26,10 @@ for the interaction, we use the restful Api to interact with backend.
 
 How to run
 -----------
-1. Open the backend appservice.py `python appservice.py`
-it should look like below
+1. Open the backend appservice.py 
+
+`python appservice.py`
+
 ![image text](https://github.com/US579/Data-Analytics-Service-Project-for-COMP9321/blob/master/image/1.png) 
 
 
@@ -37,9 +39,9 @@ it should look like below
 
 and than you can login 
 
-* username: admin
+* `username: admin`
 
-* password: admin
+* `password: admin`
 
 after login the interface are showing below
 
