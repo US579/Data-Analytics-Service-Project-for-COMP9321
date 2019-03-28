@@ -1,3 +1,23 @@
 .idea
 *.sh
 
+output/
+tmp/nanoc/
+.Ds*
+.ip*
+crash.log
+*.sh
+.git 
+.idea
+.log
+.fls
+.fdb*
+.aux
+.idea
+.vscode
+.pyc
+venv/
+**/__pycache__/
+.txt
+.DS_Store
+.~lock.README.txt#
